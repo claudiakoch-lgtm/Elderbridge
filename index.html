@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElderBridge – Zwei Generationen. Ein Austausch.</title>
+  <meta name="description" content="ElderBridge verbindet Jung und Alt durch gegenseitiges Mentoring – kostenlos, barrierefrei und für alle." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --earth-dark: #4A3020;
+      --brown: #C06A38;
+      --purple: #A050B0;
+      --ochre: #E8BB30;
+      --green: #3D9B5A;
+      --red-accent: #D94A4A;
+      --sand-light: #F2EBE1;
+      --sand-warm: #E8DCC8;
+      --cream-warm: #F8F3EC;
+      --white: #FFFFFF;
+      --text-primary: #1E1E1E;
+      --text-secondary: #3D3D3D;
+      --focus-ring: #A050B0;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    html { scroll-behavior: smooth; font-size: 100%; }
+    body {
+      font-family: var(--font-family);
+      color: var(--text-primary);
+      background: var(--cream-warm);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Skip-Link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--earth-dark);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 6px 6px;
+      font-weight: 600;
+      font-size: 1.125rem;
+      z-index: 10000;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* Fokus-Stil */
+    :focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Typografie */
+    h1, h2, h3, h4 { line-height: 1.2; color: var(--earth-dark); }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 700; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 700; margin-bottom: 1rem; }
+    h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); font-weight: 600; }
+    p, li { font-size: clamp(1rem, 1.2vw, 1.125rem); color: var(--text-secondary); }
+    a { color: var(--earth-dark); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--brown); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      min-width: 48px; min-height: 48px;
+      padding: 0.875rem 2rem;
+      font-family: var(--font-family);
+      font-size: 1.125rem; font-weight: 600;
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--brown); color: var(--white);
+    }
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background: #8B4F28; color: var(--white);
+      box-shadow: 0 4px 16px rgba(192,106,56,0.35);
+    }
+    .btn-secondary {
+      background: var(--white); color: var(--earth-dark);
+      border: 2px solid var(--earth-dark);
+    }
+    .btn-secondary:hover, .btn-secondary:focus-visible {
+      background: var(--sand-warm); color: var(--earth-dark);
+      border-color: var(--brown);
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--white);
+      border-bottom: 2px solid var(--sand-warm);
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .header .container {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding-top: 0.75rem; padding-bottom: 0.75rem;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0.625rem;
+      font-size: 1.375rem; font-weight: 700; color: var(--earth-dark);
+      text-decoration: none; white-space: nowrap;
+    }
+    .logo i { font-size: 1.75rem; }
+    .nav { display: flex; align-items: center; gap: 0.25rem; }
+    .nav a {
+      color: var(--text-primary); text-decoration: none;
+      padding: 0.75rem 1rem; border-radius: 6px;
+      font-weight: 500; font-size: 1rem;
+      transition: background 0.2s;
+      min-width: 48px; min-height: 48px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .nav a:hover, .nav a:focus-visible { background: var(--sand-light); }
+    .header .btn { margin-left: 1rem; white-space: nowrap; }
+
+    /* Mobile Nav Toggle */
+    .nav-toggle {
+      display: none; background: none; border: none;
+      min-width: 48px; min-height: 48px;
+      font-size: 1.5rem; color: var(--earth-dark);
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--sand-light) 0%, var(--cream-warm) 50%, var(--sand-warm) 100%);
+      padding: 5rem 0 4rem;
+    }
+    .hero .container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: center;
+    }
+    .hero-content { display: flex; flex-direction: column; gap: 1.5rem; }
+    .hero-tag {
+      display: inline-block; background: var(--purple); color: var(--white);
+      padding: 0.375rem 1rem; border-radius: 20px;
+      font-weight: 600; font-size: 0.875rem; letter-spacing: 0.02em;
+      width: fit-content; box-shadow: 0 2px 10px rgba(160,80,176,0.3);
+    }
+    .hero-content p { font-size: clamp(1.125rem, 1.5vw, 1.25rem); max-width: 32rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+    .hero-images {
+      border-radius: 20px; overflow: hidden; position: relative;
+      min-height: 420px;
+    }
+    .hero-images img {
+      width: 100%; height: 420px; object-fit: cover; display: block;
+    }
+    .hero-images .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(74,48,32,0.3) 0%, rgba(160,80,176,0.15) 100%);
+    }
+    .hero-images .badge {
+      position: absolute; bottom: 1.25rem; left: 1.25rem;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+      color: var(--white); padding: 0.5rem 1rem; border-radius: 30px;
+      font-size: 0.85rem; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .hero-images .badge i { color: var(--ochre); }
+
+    /* SECTION allgemein */
+    section { padding: 4.5rem 0; }
+    .section-label {
+      display: inline-block; color: var(--purple);
+      font-weight: 700; font-size: 0.875rem; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+      border-left: 4px solid var(--ochre); padding-left: 0.75rem;
+    }
+    .section-desc { max-width: 36rem; margin-bottom: 2.5rem; font-size: 1.125rem; }
+
+    /* ABLAUF */
+    .how-it-works { background: var(--white); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem; }
+    .step {
+      background: var(--sand-light); border-radius: 16px;
+      padding: 2rem 2rem 2.25rem; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .step:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(74,48,32,0.12); }
+    .step-img {
+      width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+      border: 4px solid var(--white); box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      margin-bottom: 0.25rem;
+    }
+    .step-number {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--green); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; font-weight: 700; flex-shrink: 0;
+      margin-top: -0.5rem; border: 3px solid var(--white);
+    }
+    .step h3 { color: var(--earth-dark); }
+    .step p { max-width: 24rem; }
+
+    /* MOMENTE */
+    .moments { padding: 0 0 2.5rem; }
+    .moments-grid {
+      display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 1rem;
+      align-items: stretch;
+    }
+    .moments-card {
+      margin: 0; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07); transition: transform 0.3s;
+    }
+    .moments-card:hover { transform: translateY(-4px); }
+    .moments-card img {
+      width: 100%; height: 220px; object-fit: cover; display: block;
+    }
+    .moments-card--wide img { height: 220px; }
+
+    /* VORTEILE */
+    .benefits { background: var(--sand-light); }
+    .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .benefit-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    .benefit-img {
+      width: 100%; height: 240px; object-fit: cover; border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08); transition: transform 0.3s;
+    }
+    .benefit-img:hover { transform: scale(1.02); }
+    .benefit-col h3 {
+      font-size: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+      padding-bottom: 0.75rem; border-bottom: 2px solid var(--ochre);
+    }
+    .benefit-col:first-child h3 { color: var(--purple); border-bottom-color: var(--purple); }
+    .benefit-col:last-child h3 { color: var(--brown); border-bottom-color: var(--brown); }
+    .benefit-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .benefit-item i {
+      font-size: 1.35rem; color: var(--brown); margin-top: 0.25rem;
+      min-width: 24px;
+    }
+    .benefit-item div h4 { font-size: 1.125rem; margin-bottom: 0.25rem; }
+    .benefit-item div p { font-size: 0.95rem; }
+
+    /* FAQ */
+    .faq { background: var(--white); }
+    .faq-grid { display: grid; gap: 1rem; max-width: 48rem; }
+    .faq-item {
+      border: 1px solid var(--sand-warm); border-radius: 12px;
+      overflow: hidden; transition: box-shadow 0.2s;
+    }
+    .faq-item[open] { box-shadow: 0 2px 12px rgba(212,168,67,0.15); }
+    .faq-question {
+      list-style: none; padding: 1.25rem 1.5rem;
+      font-weight: 600; font-size: 1.125rem; color: var(--text-primary);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      min-height: 48px;
+      transition: background 0.2s;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question:hover { background: var(--sand-light); }
+    .faq-question::after {
+      content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      font-size: 0.875rem; transition: transform 0.2s; flex-shrink: 0;
+    }
+    .faq-item[open] .faq-question::after { transform: rotate(180deg); }
+    .faq-answer { padding: 0 1.5rem 1.25rem; }
+    .faq-answer p { font-size: 1rem; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--purple) 0%, #7B3D8A 100%);
+      color: var(--white); text-align: center;
+    }
+    .cta-section h2 { color: var(--white); }
+    .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 2rem; }
+    .cta-section .btn-primary { background: var(--white); color: var(--purple); }
+    .cta-section .btn-primary:hover { background: var(--sand-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+    /* FOOTER */
+    .footer { background: var(--earth-dark); color: rgba(255,255,255,0.85); padding: 3rem 0 1.5rem; }
+    .footer .container { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 2.5rem; }
+    .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+    .footer-brand .logo { color: var(--white); }
+    .footer-brand p { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+    .social-links { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .social-links a {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 48px; min-height: 48px;
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.12); color: var(--white);
+      border-radius: 50%; font-size: 1.25rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .social-links a:hover { background: var(--ochre); transform: translateY(-3px); box-shadow: 0 4px 12px rgba(232,187,48,0.4); }
+    .footer h4 { color: var(--white); margin-bottom: 1rem; font-size: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem;
+      padding: 0.25rem 0; display: inline-block;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 1.5rem; margin-top: 1.5rem;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 1rem;
+      opacity: 0; visibility: hidden; transition: opacity 0.25s, visibility 0.25s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--white); border-radius: 16px; padding: 2.5rem;
+      max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none;
+      min-width: 48px; min-height: 48px;
+      font-size: 1.5rem; color: var(--text-secondary);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal h2 { margin-bottom: 0.5rem; }
+    .modal p { margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block; font-weight: 600; margin-bottom: 0.375rem;
+      font-size: 0.95rem;
+    }
+    .form-group input, .form-group select {
+      width: 100%; padding: 0.875rem 1rem;
+      font-family: var(--font-family); font-size: 1rem;
+      border: 2px solid var(--sand-warm); border-radius: 8px;
+      background: var(--white); transition: border-color 0.2s;
+      min-height: 48px;
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--purple); outline: none;
+      box-shadow: 0 0 0 3px rgba(123,93,126,0.15);
+    }
+    .form-group .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero-content p { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-images { min-height: 280px; }
+      .hero-images img { height: 280px; }
+      .steps { grid-template-columns: 1fr; max-width: 28rem; margin-left: auto; margin-right: auto; }
+      .moments-grid { grid-template-columns: 1fr; }
+      .moments-card img, .moments-card--wide img { height: 200px; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .footer .container { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--white); border-bottom: 2px solid var(--sand-warm);
+        padding: 0.5rem 1.5rem 1rem; }
+      .nav.open { display: flex; }
+      .nav a { width: 100%; justify-content: flex-start; }
+      .header .btn-primary { display: none; }
+      .header .btn-primary.mobile-visible { display: inline-flex; margin-left: 0; }
+      .footer .container { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 0; }
+      .faq-question { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip Navigation -->
+  <a class="skip-link" href="#main">Direkt zum Inhalt springen</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container">
+      <a href="/" class="logo" aria-label="ElderBridge Startseite">
+        <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+        <span>ElderBridge</span>
+      </a>
+      <nav class="nav" id="main-nav" role="navigation" aria-label="Hauptnavigation">
+        <a href="#ablauf">So funktioniert's</a>
+        <a href="#momente">Momente</a>
+        <a href="#vorteile">Vorteile</a>
+        <a href="#faq">FAQ</a>
+        <a href="#mitmachen" class="btn btn-primary mobile-visible">Kostenlos mitmachen</a>
+      </nav>
+      <a href="#mitmachen" class="btn btn-primary">Kostenlos mitmachen</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Willkommen bei ElderBridge">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">100 % kostenlos &amp; gemeinnützig</span>
+          <h1>Zwei Generationen.<br />Ein Austausch.</h1>
+          <p>Junge Menschen teilen digitale Kenntnisse – ältere Menschen schenken Lebenserfahrung. Gemeinsam wachsen, voneinander lernen.</p>
+          <div class="hero-actions">
+            <a href="#mitmachen" class="btn btn-primary"><i class="fas fa-user-plus" aria-hidden="true"></i> Kostenlos anmelden</a>
+            <a href="#ablauf" class="btn btn-secondary"><i class="fas fa-info-circle" aria-hidden="true"></i> Mehr erfahren</a>
+          </div>
+        </div>
+        <div class="hero-images">
+          <img src="https://images.pexels.com/photos/3768140/pexels-photo-3768140.jpeg?auto=compress&cs=tinysrgb&w=800&fit=crop" alt="Junge Frau zeigt Großmutter etwas auf dem Smartphone – generationenübergreifender Austausch voller Freude" loading="lazy" />
+          <div class="overlay" aria-hidden="true"></div>
+          <span class="badge"><i class="fas fa-heart" aria-hidden="true"></i> Gemeinsam lachen, gemeinsam lernen</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABLAUF -->
+    <section class="how-it-works" id="ablauf" aria-labelledby="ablauf-heading">
+      <div class="container">
+        <span class="section-label">Ablauf</span>
+        <h2 id="ablauf-heading">So funktioniert's</h2>
+        <p class="section-desc">In drei einfachen Schritten zu deiner generationsübergreifenden Austauschpartnerin oder deinem Austauschpartner.</p>
+        <div class="steps">
+          <article class="step">
+            <img class="step-img" src="https://images.pexels.com/photos/3791664/pexels-photo-3791664.jpeg?auto=compress&cs=tinysrgb&w=240&fit=crop" alt="Seniorin und junge Erwachsene nutzen gemeinsam ein Smartphone – voller Freude und Verbundenheit" loading="lazy" />
+            <span class="step-number" aria-hidden="true">1</span>
+            <h3>Kostenlos registrieren</h3>
+            <p>Erstelle in 2 Minuten ein Profil – mit deinem Namen, deinen Interessen und ob du lieber lehrst oder lernst.</p>
+          </article>
+          <article class="step">
+            <img class="step-img" src="https://images.pexels.com/photos/3768168/pexels-photo-3768168.jpeg?auto=compress&cs=tinysrgb&w=240&fit=crop" alt="Junge Frau umarmt Großmutter beim Lesen – vertrauter Moment zwischen den Generationen" loading="lazy" />
+            <span class="step-number" aria-hidden="true">2</span>
+            <h3>Passendes Match finden</h3>
+            <p>Unser System bringt dich mit Menschen zusammen, deren Erfahrungen und Wünsche zu deinen passen – in deiner Nähe oder online.</p>
+          </article>
+          <article class="step">
+            <img class="step-img" src="https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=240&fit=crop" alt="Junge Frau begrüßt ihre ältere Mutter freudig im Garten – voller Freude und Verbundenheit" loading="lazy" />
+            <span class="step-number" aria-hidden="true">3</span>
+            <h3>Gemeinsam wachsen</h3>
+            <p>Ob Video-Call, Spaziergang oder Kaffeetrinken – du bestimmst Tempo, Form und Dauer des Austauschs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOMENTE -->
+    <section class="moments" id="momente" aria-label="Begegnungen zwischen den Generationen">
+      <div class="container">
+        <div class="moments-grid">
+          <figure class="moments-card">
+            <img src="https://images.pexels.com/photos/17059938/pexels-photo-17059938.jpeg?auto=compress&cs=tinysrgb&w=400&fit=crop" alt="Junge Frau umarmt Großmutter liebevoll" loading="lazy" />
+          </figure>
+          <figure class="moments-card moments-card--wide">
+            <img src="https://images.pexels.com/photos/9479560/pexels-photo-9479560.jpeg?auto=compress&cs=tinysrgb&w=600&fit=crop" alt="Drei Generationen Frauen lächeln gemeinsam – Verbundenheit und Freude" loading="lazy" />
+          </figure>
+          <figure class="moments-card">
+            <img src="https://images.pexels.com/photos/3791664/pexels-photo-3791664.jpeg?auto=compress&cs=tinysrgb&w=400&fit=crop" alt="Seniorin und junge Erwachsene nutzen gemeinsam ein Smartphone" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- VORTEILE -->
+    <section class="benefits" id="vorteile" aria-labelledby="vorteile-heading">
+      <div class="container">
+        <span class="section-label">Vorteile</span>
+        <h2 id="vorteile-heading">Was du davon hast</h2>
+        <p class="section-desc">ElderBridge ist keine Einbahnstraße. Beide Seiten profitieren – auf Augenhöhe.</p>
+        <div class="benefits-grid">
+          <div class="benefit-col">
+            <img class="benefit-img" src="https://images.pexels.com/photos/3768168/pexels-photo-3768168.jpeg?auto=compress&cs=tinysrgb&w=600&fit=crop" alt="Junge Frau umarmt Großmutter beim Lesen – vertrauter Moment" loading="lazy" />
+            <h3><i class="fas fa-leaf" aria-hidden="true"></i> Für Jüngere</h3>
+            <div class="benefit-item">
+              <i class="fas fa-compass" aria-hidden="true"></i>
+              <div>
+                <h4>Lebensweisheit &amp; Orientierung</h4>
+                <p>Profitiere von Jahrzehnten an Erfahrung – bei Karriere, Beziehungen und persönlicher Entwicklung.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-heart" aria-hidden="true"></i>
+              <div>
+                <h4>Mentoring auf Augenhöhe</h4>
+                <p>Ehrliche Gespräche abseits von Leistungsdruck. Deine Mentoren haben Zeit und nehmen sich Zeit.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-users" aria-hidden="true"></i>
+              <div>
+                <h4>Sinnstiftende Verbindung</h4>
+                <p>Baue echte Brücken – generationenübergreifende Freundschaften, die oft ein Leben lang halten.</p>
+              </div>
+            </div>
+          </div>
+          <div class="benefit-col">
+            <img class="benefit-img" src="https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=600&fit=crop" alt="Junge Frau begrüßt ihre ältere Mutter freudig im Garten – glücklich und verbunden" loading="lazy" />
+            <h3><i class="fas fa-tree" aria-hidden="true"></i> Für Ältere</h3>
+            <div class="benefit-item">
+              <i class="fas fa-laptop" aria-hidden="true"></i>
+              <div>
+                <h4>Digitale Sicherheit</h4>
+                <p>Lerne Schritt für Schritt den Umgang mit Smartphone, Tablet und Computer – geduldig und ohne Scham.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-link" aria-hidden="true"></i>
+              <div>
+                <h4>In Verbindung bleiben</h4>
+                <p>Videoanrufe mit Enkeln, Online-Banking, digitale Behördengänge – wir machen dich fit für die digitale Welt.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-lightbulb" aria-hidden="true"></i>
+              <div>
+                <h4>Neue Perspektiven</h4>
+                <p>Tauche ein in die Gedankenwelt der jungen Generation. Entdecke neue Musik, Kultur und frische Ideen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <span class="section-label">FAQ</span>
+        <h2 id="faq-heading">Häufige Fragen</h2>
+        <p class="section-desc">Antworten zu den wichtigsten Themen rund um Barrierefreiheit, Sicherheit und Kostenfreiheit.</p>
+        <div class="faq-grid">
+          <details class="faq-item">
+            <summary class="faq-question">Ist ElderBridge wirklich komplett kostenlos?</summary>
+            <div class="faq-answer">
+              <p>Ja, zu 100 %. ElderBridge ist ein gemeinnütziges Projekt und wird durch Spenden und Fördermittel getragen. Es gibt keine versteckten Kosten, keine Premium-Mitgliedschaften und keine Bezahlschranken.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Wie wird meine Privatsphäre geschützt?</summary>
+            <div class="faq-answer">
+              <p>Deine Daten sind bei uns sicher. Wir speichern nur das Nötigste, geben nichts an Dritte weiter und du bestimmst selbst, welche Informationen sichtbar sind. Alle Verbindungen sind verschlüsselt.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Ich bin älter und habe wenig Erfahrung mit Technik – kann ich trotzdem mitmachen?</summary>
+            <div class="faq-answer">
+              <p>Unbedingt! Genau dafür sind wir da. Du brauchst nur ein einfaches Smartphone oder einen Computer mit Internetzugang. Wir helfen dir beim Einstieg – und dein junger Mentor begleitet dich in deinem Tempo.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Ist die Plattform barrierefrei?</summary>
+            <div class="faq-answer">
+              <p>Ja. Wir entwickeln nach WCAG 2.1 AA-Standards. Große Schriften, hohe Kontraste, komplette Tastaturbedienung und Screenreader-Unterstützung sind für uns selbstverständlich.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Wie werden Teilnehmer geprüft? Gibt es ein Sicherheitskonzept?</summary>
+            <div class="faq-answer">
+              <p>Ja. Jede Registrierung wird manuell freigeschaltet. Notfallkontakte, ein Meldesystem und freiwillige Selbstauskünfte sorgen für ein sicheres Umfeld. Wir arbeiten zudem mit lokalen Seniorenbüros und Jugendeinrichtungen zusammen.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="mitmachen" aria-labelledby="cta-heading">
+      <div class="container">
+        <h2 id="cta-heading">Bereit für eine Brücke?</h2>
+        <p>Werde Teil der Community und finde dein generationsübergreifendes Match – in 2 Minuten, kostenlos.</p>
+        <button class="btn btn-primary" id="cta-open-modal" aria-haspopup="dialog">
+          <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Jetzt kostenlos anmelden
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="ElderBridge Startseite">
+          <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+          <span>ElderBridge</span>
+        </a>
+        <p>Brücken zwischen Generationen bauen – Wissen, Erfahrungen und digitale Hilfe austauschen.</p>
+        <div class="social-links">
+          <a href="#" aria-label="ElderBridge auf Facebook" title="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="ElderBridge auf Instagram" title="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="ElderBridge auf LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Angebot</h4>
+        <ul class="footer-links">
+          <li><a href="#ablauf">So funktioniert's</a></li>
+          <li><a href="#vorteile">Vorteile</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul class="footer-links">
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">Barrierefreiheit</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 ElderBridge e.V. – Alle Rechte vorbehalten.</span>
+        <span>100 % gemeinnützig &amp; kostenlos</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="register-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" aria-label="Schließen"><i class="fas fa-times" aria-hidden="true"></i></button>
+      <h2 id="modal-heading">Kostenlos anmelden</h2>
+      <p>Starte jetzt und finde dein generationsübergreifendes Match.</p>
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label for="form-name">Vorname *</label>
+          <input type="text" id="form-name" name="name" required autocomplete="given-name" placeholder="Dein Vorname" />
+        </div>
+        <div class="form-group">
+          <label for="form-email">E-Mail-Adresse *</label>
+          <input type="email" id="form-email" name="email" required autocomplete="email" placeholder="beispiel@email.de" />
+        </div>
+        <div class="form-group">
+          <label for="form-age">Altersgruppe</label>
+          <select id="form-age" name="age">
+            <option value="">Bitte wählen…</option>
+            <option value="under30">Unter 30</option>
+            <option value="30-50">30–50 Jahre</option>
+            <option value="50-70">50–70 Jahre</option>
+            <option value="over70">Über 70</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="form-role">Ich möchte …</label>
+          <select id="form-role" name="role">
+            <option value="">Bitte wählen…</option>
+            <option value="mentor">Mentor sein (Wissen weitergeben)</option>
+            <option value="mentee">Mentee sein (Neues lernen)</option>
+            <option value="both">Beides</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="form-consent" required />
+            Ich habe die <a href="#">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-paper-plane" aria-hidden="true"></i> Jetzt anmelden</button>
+      </form>
+      <p id="form-success" style="display:none;margin-top:1rem;font-weight:600;color:var(--green);">✓ Anmeldung erfolgreich! Wir melden uns in Kürze bei dir.</p>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Mobile Nav
+      var toggle = document.getElementById('nav-toggle');
+      var nav = document.getElementById('main-nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function() {
+          var open = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open);
+          toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+        });
+      }
+
+      // Modal
+      var modalOverlay = document.getElementById('register-modal');
+      var ctaBtn = document.getElementById('cta-open-modal');
+      var modalClose = document.getElementById('modal-close');
+      var form = document.getElementById('register-form');
+      var formSuccess = document.getElementById('form-success');
+      var modalTriggers = document.querySelectorAll('a[href="#mitmachen"]');
+
+      function openModal() {
+        modalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (formSuccess) formSuccess.style.display = 'none';
+        if (form) form.style.display = 'block';
+        var firstInput = document.querySelector('#register-form input');
+        if (firstInput) setTimeout(function() { firstInput.focus(); }, 100);
+      }
+
+      function closeModal() {
+        modalOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        if (ctaBtn) ctaBtn.focus();
+      }
+
+      if (ctaBtn) ctaBtn.addEventListener('click', openModal);
+      modalTriggers.forEach(function(el) { el.addEventListener('click', openModal); });
+      if (modalClose) modalClose.addEventListener('click', closeModal);
+      if (modalOverlay) modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal(); });
+
+      // Form Submit
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var name = document.getElementById('form-name').value.trim();
+          var email = document.getElementById('form-email').value.trim();
+          var consent = document.getElementById('form-consent').checked;
+          if (!name || !email || !consent) {
+            alert('Bitte fülle alle Pflichtfelder aus (Vorname, E-Mail, Datenschutz-Zustimmung).');
+            return;
+          }
+          form.style.display = 'none';
+          formSuccess.style.display = 'block';
+        });
+      }
+
+      // Smooth scroll for all anchor links (progressive enhancement)
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var id = this.getAttribute('href');
+          if (id === '#') return;
+          var target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
