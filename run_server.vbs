@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "cmd /c cd /d ""C:\Users\Dci-Student\Documents\New OpenCode Project"" && python server.py", 0, False
